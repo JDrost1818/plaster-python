@@ -2,6 +2,6 @@ Project to bring similar functionality found in Rails to the Spring Boot platfor
 
 For Example:
 
-    python main.py g scaffold User name:string age:integer
+    > python main.py g scaffold User name:string age:integer
 
 Will create a bunch of files.
