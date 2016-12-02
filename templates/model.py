@@ -24,7 +24,7 @@ _field_template = '''
 '''
 
 
-def gen_contents(package, repo_name, model_package, model_name, fields, id_type='Integer'):
+def gen_contents(package, model_package, model_name, fields, id_type='Integer'):
     file_contents = _template.format(
         package=package,
         model_package=model_package,
@@ -38,4 +38,4 @@ def gen_contents(package, repo_name, model_package, model_name, fields, id_type=
         if field_type:
             file_contents += _field_template.format(type=field_type, name=name)
 
-    print file_contents + '}}'
+    return file_contents + "}}"

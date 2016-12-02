@@ -1,16 +1,15 @@
-_template = """
-package {package};
+_template = """package {package};
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.repository.CrudRepository;
 
-import com.{model_package}.{model};
+import {model_package}.{model};
 
 public interface {repo_name} extends CrudRepository<{model}, {id_type}> {{
 
-    List<{model}> findAll(Specification<{model}> spec);
+    Page<{model}> findAll(Specification<{model}> spec, Pageable pageInfo);
 
     {model} findOne(Specification<{model}> spec);
 

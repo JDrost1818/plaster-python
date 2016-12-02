@@ -9,16 +9,24 @@ def generate_model(rel_path, maven_group_id, gen_name, fields, type):
     package = gen_repo_package(maven_group_id)
     model_package = gen_model_package(maven_group_id)
 
-    model_file_gen.gen_contents(package, gen_name, model_package, gen_name, fields)
+    file_contents = model_file_gen.gen_contents(package, model_package, gen_name, fields)
 
 
 def generate_repository(rel_path, maven_group_id, gen_name, fields, type):
-    print 'Generating repository at :', gen_path(rel_path, maven_group_id) + gen_name + "Repository.java"
+    repo_name = gen_name + "Repository"
+    rel_path = gen_repo_path(rel_path, maven_group_id)
+    filename = repo_name + '.java'
 
     package = gen_repo_package(maven_group_id)
     model_package = gen_model_package(maven_group_id)
 
-    repo_file_gen.gen_contents(package, gen_name, model_package, gen_name)
+    model_file = create_file(rel_path, filename)
+
+    file_contents = repo_file_gen.gen_contents(package, repo_name, model_package, gen_name)
+
+    print 'Writing the following contents :', file_contents
+    model_file.write(file_contents)
+    model_file.close()
 
 
 def generate_service(rel_path, maven_group_id, gen_name, fields, type):
