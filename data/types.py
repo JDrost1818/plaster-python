@@ -1,7 +1,7 @@
 CONTROLLER = 'controller'
 SERVICE = 'service'
 REPOSITORY = 'repository'
-MODEL = 'model'
+MODEL = 'domain'
 
 ALL = [
     CONTROLLER,

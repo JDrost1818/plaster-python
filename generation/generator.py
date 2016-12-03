@@ -1,9 +1,9 @@
 import pattern.text.en as pattern
 
 import data.types as gen_types
-import template.model as model_file_gen
+import template.model.model as model_file_gen
 import template.repository as repo_file_gen
-from model.file_information import FileInformation
+from domain.file_information import FileInformation
 from util.util import *
 
 _generation_map = {
@@ -17,6 +17,7 @@ _template_map = {
     gen_types.MODEL: model_file_gen,
     gen_types.REPOSITORY: repo_file_gen
 }
+
 
 def generate_repository(rel_path, maven_group_id, gen_name, fields, type):
     """
