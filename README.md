@@ -12,14 +12,15 @@ Will create the following files:
 * Service - root/service/UserService.java
 * Controller - root/controller/UsersController.java
 
-The root is calculated upon script start. For example, if being run on a project with the following in the `pom.xml`:
+The root is calculated upon script start. For example, if being run on a project with the following in `pom.xml`:
 
     <groupId>com.example</groupId>
 
-the root will be src/main/com/example/
+the root will be `src/main/com/example/`
 
 ### Lombok Support
-Generation of models will change if a lombok dependency is found in `pom.xml`. This will import lombok and annotate the model differntly. For example:
+Generation of models will change if a lombok dependency is found in `pom.xml`. This will import lombok and annotate
+the model differently. For example:
 
     //NO LOMBOK
     @Entity
