@@ -1,6 +1,7 @@
 import pattern.text.en as pattern
 
 import data.types as gen_types
+import template.controller as controller_file_gen
 import template.model.model as model_file_gen
 import template.repository as repo_file_gen
 import template.service as service_file_gen
@@ -11,14 +12,16 @@ _generation_map = {
     'scaffold': [
         gen_types.MODEL,
         gen_types.REPOSITORY,
-        gen_types.SERVICE
+        gen_types.SERVICE,
+        gen_types.CONTROLLER,
     ]
 }
 
 _template_map = {
     gen_types.MODEL: model_file_gen,
     gen_types.REPOSITORY: repo_file_gen,
-    gen_types.SERVICE: service_file_gen
+    gen_types.SERVICE: service_file_gen,
+    gen_types.CONTROLLER: controller_file_gen,
 }
 
 

@@ -1,3 +1,4 @@
+import converter.controller as controller_converter
 import converter.model as model_converter
 import converter.repository as repo_converter
 import converter.service as service_converter
@@ -8,6 +9,7 @@ file_converters = {
     gen_types.MODEL: model_converter,
     gen_types.REPOSITORY: repo_converter,
     gen_types.SERVICE: service_converter,
+    gen_types.CONTROLLER: controller_converter,
 }
 
 

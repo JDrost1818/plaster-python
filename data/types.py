@@ -7,5 +7,5 @@ ALL = [
     MODEL,
     REPOSITORY,
     SERVICE,
-    CONTROLLER
+    CONTROLLER,
 ]

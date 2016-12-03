@@ -9,7 +9,8 @@ IS_LOMBOK_SUPPORTED = False
 RELATIVE_PACKAGES = {
     types.MODEL: 'model',
     types.REPOSITORY: 'repository',
-    types.SERVICE: 'service'
+    types.SERVICE: 'service',
+    types.CONTROLLER: 'controller',
 }
 
 
