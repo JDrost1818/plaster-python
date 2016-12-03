@@ -1,11 +1,11 @@
-CONTROLLER = 'controller'
-SERVICE = 'service'
+MODEL = 'model'
 REPOSITORY = 'repository'
-MODEL = 'domain'
+SERVICE = 'service'
+CONTROLLER = 'controller'
 
 ALL = [
-    CONTROLLER,
-    SERVICE,
+    MODEL,
     REPOSITORY,
-    MODEL
+    SERVICE,
+    CONTROLLER
 ]

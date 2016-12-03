@@ -3,19 +3,22 @@ import pattern.text.en as pattern
 import data.types as gen_types
 import template.model.model as model_file_gen
 import template.repository as repo_file_gen
+import template.service as service_file_gen
 from domain.file_information import FileInformation
 from util.util import *
 
 _generation_map = {
     'scaffold': [
         gen_types.MODEL,
-        gen_types.REPOSITORY
+        gen_types.REPOSITORY,
+        gen_types.SERVICE
     ]
 }
 
 _template_map = {
     gen_types.MODEL: model_file_gen,
-    gen_types.REPOSITORY: repo_file_gen
+    gen_types.REPOSITORY: repo_file_gen,
+    gen_types.SERVICE: service_file_gen
 }
 
 

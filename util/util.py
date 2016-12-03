@@ -10,21 +10,5 @@ def create_file(path, name, file_contents, create_not_found_dirs=True, mode="w+"
     file.close()
 
 
-def gen_path(rel_path, maven_group_id):
-    return rel_path + maven_group_id.replace('.', '/') + '/'
-
-
-def gen_repo_path(rel_path, maven_group_id):
-    return gen_path(rel_path, maven_group_id) + 'repository'
-
-
-def gen_repo_package(maven_group_id, name=None):
-    base = maven_group_id + '.' + 'repository'
-
-    return base + '.' + name if name else base
-
-
-def gen_model_package(maven_group_id, name=None):
-    base = maven_group_id + '.' + 'model'
-
-    return base + '.' + name if name else base
+def type_to_var(type):
+    return type[0].lower() + type[1:]

@@ -1,7 +1,7 @@
 import pattern.text.en as pattern
 
 import data.settings as settings
-from data.types import MODEL as GEN_TYPE
+from data.types import SERVICE as GEN_TYPE
 
 
 def gen_package_name():
@@ -9,7 +9,7 @@ def gen_package_name():
 
 
 def gen_class_name(root_name):
-    return pattern.singularize(root_name)
+    return pattern.singularize(root_name) + 'Service'
 
 
 def gen_file_path():

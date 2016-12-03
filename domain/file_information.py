@@ -1,11 +1,13 @@
 import converter.model as model_converter
 import converter.repository as repo_converter
+import converter.service as service_converter
 import data.types as gen_types
 from field import Field
 
 file_converters = {
     gen_types.MODEL: model_converter,
     gen_types.REPOSITORY: repo_converter,
+    gen_types.SERVICE: service_converter,
 }
 
 
@@ -15,10 +17,11 @@ class FileInformation:
         if not converter:
             raise ValueError('Unsupported FileType :', file_type)
 
+        self.seed_name = name
         self.package = converter.gen_package_name()
         self.class_name = converter.gen_class_name(name)
-        self.model_package = converter.gen_model_package_name()
-        self.model_name = converter.gen_model_name(name)
+        self.model_package = model_converter.gen_package_name()
+        self.model_name = model_converter.gen_class_name(name)
         self.file_path = converter.gen_file_path()
         self.file_name = converter.gen_file_name(name)
         self.file_type = file_type

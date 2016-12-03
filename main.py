@@ -21,19 +21,14 @@ import xml.etree.ElementTree as ET
 import data.settings as settings
 import generation.generator as generator
 
-
-def exit_bad_args():
-    print 'USAGE: python main.py <type>'
-    sys.exit(-1)
-
-
 generators = {
     'g': generator,
     'generate': generator
 }
 
 if len(sys.argv) < 2:
-    exit_bad_args()
+    print 'USAGE: python main.py <type>'
+    sys.exit(-1)
 if not os.path.isfile('./pom.xml'):
     print 'Not on the root level of a maven project - cannot generate'
     sys.exit(-1)
