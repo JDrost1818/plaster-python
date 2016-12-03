@@ -18,10 +18,10 @@ public interface {class_name} extends CrudRepository<{model}, {id_type}> {{
 """
 
 
-def gen_contents(package, class_name, model_package, model_name, id_type='Integer'):
+def gen_contents(file_info, id_type='Integer'):
     return _template.format(
-        package=package,
-        class_name=class_name,
-        model_package=model_package,
-        model=model_name,
+        package=file_info.package,
+        class_name=file_info.class_name,
+        model_package=file_info.model_package,
+        model=file_info.model_name,
         id_type=id_type)

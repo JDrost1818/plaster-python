@@ -18,6 +18,7 @@ import os
 import sys
 import xml.etree.ElementTree as ET
 
+import data.settings as settings
 import generation.generator as generator
 
 
@@ -51,9 +52,12 @@ gen_name = args[2].lower()
 gen_kwargs = args[3:]
 
 rel_path = 'src/main/java/'
-maven_group_id = getMavenGroupId();
+maven_group_id = getMavenGroupId()
 
-error = generators[gen_type].perform(rel_path, maven_group_id, gen_sub_type, gen_name, gen_kwargs)
+settings.REL_PATH = rel_path + maven_group_id.replace('.', '/') + '/'
+settings.MAVEN_GROUP_ID = maven_group_id
+
+error = generators[gen_type].perform(gen_sub_type, gen_name, gen_kwargs)
 
 if error:
     print error

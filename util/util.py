@@ -24,9 +24,6 @@ def gen_repo_package(maven_group_id, name=None):
 
     return base + '.' + name if name else base
 
-def gen_model_path(rel_path, maven_group_id):
-    return gen_path(rel_path, maven_group_id) + 'model'
-
 def gen_model_package(maven_group_id, name=None):
     base = maven_group_id + '.' + 'model'
 
