@@ -6,28 +6,48 @@ from util.util import *
 
 
 def generate_model(rel_path, maven_group_id, gen_name, fields, type):
-    package = gen_repo_package(maven_group_id)
-    model_package = gen_model_package(maven_group_id)
+    """
+    Facilitates the necessary information to create a file and populate a template for a model
 
-    file_contents = model_file_gen.gen_contents(package, model_package, gen_name, fields)
+    :param rel_path:
+    :param maven_group_id:
+    :param gen_name:
+    :param fields:
+    :param type:
+    :return:
+    """
+    package = gen_model_package(maven_group_id)
+    class_name = gen_name
+    filename = class_name + '.java'
+    rel_path = gen_model_path(rel_path, maven_group_id)
+
+    file_contents = model_file_gen.gen_contents(package, class_name, fields)
+    create_file(rel_path, filename, file_contents)
 
 
 def generate_repository(rel_path, maven_group_id, gen_name, fields, type):
-    repo_name = gen_name + "Repository"
-    rel_path = gen_repo_path(rel_path, maven_group_id)
-    filename = repo_name + '.java'
+    """
+    Facilitates the necessary information to create a file and populate a template for a repository
 
+    :param rel_path:
+    :param maven_group_id:
+    :param gen_name:
+    :param fields:
+    :param type:
+    :return:
+    """
+
+    # transforms the given information into specialized
+    # info which will be used to create the file
     package = gen_repo_package(maven_group_id)
+    class_name = gen_name + 'Repository'
+    filename = class_name + '.java'
+    rel_path = gen_repo_path(rel_path, maven_group_id)
     model_package = gen_model_package(maven_group_id)
 
-    model_file = create_file(rel_path, filename)
-
-    file_contents = repo_file_gen.gen_contents(package, repo_name, model_package, gen_name)
-
-    print 'Writing the following contents :', file_contents
-    model_file.write(file_contents)
-    model_file.close()
-
+    # generates the file contents and then creates the file
+    file_contents = repo_file_gen.gen_contents(package, class_name, model_package, gen_name)
+    create_file(rel_path, filename, file_contents)
 
 def generate_service(rel_path, maven_group_id, gen_name, fields, type):
     print 'Generating service at :', gen_path(rel_path, maven_group_id) + gen_name + "Service.java"

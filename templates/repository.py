@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import {model_package}.{model};
 
-public interface {repo_name} extends CrudRepository<{model}, {id_type}> {{
+public interface {class_name} extends CrudRepository<{model}, {id_type}> {{
 
     Page<{model}> findAll(Specification<{model}> spec, Pageable pageInfo);
 
@@ -18,10 +18,10 @@ public interface {repo_name} extends CrudRepository<{model}, {id_type}> {{
 """
 
 
-def gen_contents(package, repo_name, model_package, model_name, id_type='Integer'):
+def gen_contents(package, class_name, model_package, model_name, id_type='Integer'):
     return _template.format(
         package=package,
+        class_name=class_name,
         model_package=model_package,
         model=model_name,
-        id_type=id_type,
-        repo_name=repo_name)
+        id_type=id_type)
