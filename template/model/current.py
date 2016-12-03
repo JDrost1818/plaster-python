@@ -12,7 +12,6 @@ public class {class_name} {{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private {id_type} id;
     {body}
-
 }}
 
 '''
