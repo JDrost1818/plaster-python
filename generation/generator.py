@@ -19,42 +19,6 @@ _template_map = {
 }
 
 
-def generate_repository(rel_path, maven_group_id, gen_name, fields, type):
-    """
-    Facilitates the necessary information to create a file and populate a template for a repository
-
-    :param rel_path:
-    :param maven_group_id:
-    :param gen_name:
-    :param fields:
-    :param type:
-    :return:
-    """
-
-    # transforms the given information into specialized
-    # info which will be used to create the file
-    package = gen_repo_package(maven_group_id)
-    class_name = gen_name + 'Repository'
-    filename = class_name + '.java'
-    rel_path = gen_repo_path(rel_path, maven_group_id)
-    model_package = gen_model_package(maven_group_id)
-
-    # generates the file contents and then creates the file
-    file_contents = repo_file_gen.gen_contents(package, class_name, model_package, gen_name)
-    create_file(rel_path, filename, file_contents)
-
-
-def generate_service(rel_path, maven_group_id, gen_name, fields, type):
-    print 'Generating service at :', gen_path(rel_path, maven_group_id) + gen_name + "Service.java"
-
-
-def generate_controller(rel_path, maven_group_id, gen_name, fields, type):
-    rel_path = gen_path(rel_path, maven_group_id)
-    filename = gen_name + 'sController.java'
-
-    print 'Generating controller at :', rel_path + filename
-
-
 def generate_file(file_info):
     template = _template_map[file_info.file_type]
 

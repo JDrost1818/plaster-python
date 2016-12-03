@@ -27,12 +27,6 @@ def exit_bad_args():
     sys.exit(-1)
 
 
-def getMavenGroupId():
-    pom_tree = ET.parse('pom.xml').getroot()
-    root_tag = pom_tree.tag.replace('project', '')
-    return pom_tree.find(root_tag + 'groupId').text
-
-
 generators = {
     'g': generator,
     'generate': generator
@@ -51,11 +45,7 @@ gen_sub_type = args[1].lower()
 gen_name = args[2].lower()
 gen_kwargs = args[3:]
 
-rel_path = 'src/main/java/'
-maven_group_id = getMavenGroupId()
-
-settings.REL_PATH = rel_path + maven_group_id.replace('.', '/') + '/'
-settings.MAVEN_GROUP_ID = maven_group_id
+settings.load(ET.parse('pom.xml').getroot())
 
 error = generators[gen_type].perform(gen_sub_type, gen_name, gen_kwargs)
 
