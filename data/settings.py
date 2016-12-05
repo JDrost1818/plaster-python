@@ -25,9 +25,17 @@ def load():
 
 
 def load_from_pom():
+    """
+    There are many settings that need to be read from the pom to
+     make the program run correctly. This parses the pom in order
+     to get such relevant information such as calculating the root
+     directory, determining which dependencies are found, and the like.
+    """
     global REL_PATH, MAVEN_GROUP_ID, IS_LOMBOK_SUPPORTED
 
     xml_tree = ET.parse('pom.xml').getroot()
+    if not xml_tree:
+        raise IOError('Could not find pom.xml')
 
     # Everything is prepended with this version,
     # so lets get it so we can use it down the line
@@ -51,6 +59,11 @@ def load_from_pom():
 
 
 def load_from_settings_file():
+    """
+    Searches configuration options defined for the project in the bootgen.yml
+     file. Anything properties found should overwrite the defaults and those
+     found in the pom. 
+    """
     global IS_LOMBOK_SUPPORTED, RELATIVE_PACKAGES
 
     # Check to see if a settings file

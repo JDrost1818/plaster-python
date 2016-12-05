@@ -17,30 +17,37 @@ _getter_setter_template = '''
     }}
 '''
 
+_dependency_template = 'import {dep};\n'
+
 
 def get_template(enable_lombok):
     return LOMBOK_TEMPLATE if enable_lombok else TEMPLATE
 
 
 def gen_contents(file_info, id_type='Integer'):
+    dependencies = ''
     body = ''
 
     # Enters all the fields to be associated with the model
     for field in file_info.fields:
-        body += _field_template.format(type=field.field_type, name=field.name)
+        body += _field_template.format(type=field.field_type.class_name, name=field.name)
 
     # If lombok is not supported, we must manually
     # enter in the getters and the setters
     if not settings.IS_LOMBOK_SUPPORTED:
         for field in [Field('id', 'Integer')] + file_info.fields:
             body += _getter_setter_template.format(
-                type=field.field_type,
+                type=field.field_type.class_name,
                 name=field.name,
                 cap_name=field.name.capitalize())
+
+            if field.field_type.has_dependency():
+                dependencies += _dependency_template.format(dep=field.field_type.dependency)
 
     # Fill in the template with the content we created
     return get_template(settings.IS_LOMBOK_SUPPORTED).format(
         package=file_info.package,
+        dependencies=dependencies,
         class_name=file_info.class_name,
         id_type=id_type,
         header='',

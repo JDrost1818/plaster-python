@@ -1,19 +1,5 @@
 #!/usr/bin/python
 
-"""
-To use this generation utility you must subscribe to a few naming conventions:
-
-    Note: generating "user"
-
-    Type       : Folder               : Filename
-    ------------------------
-    Controller : src/main/{maven-groupId}/controller/ : UsersController
-    Service    : src/main/{maven-groupId}/service/    : UserService
-    Repository : src/main/{maven-groupId}/repository/ : UserRepository
-
-    There is currently no way to change these defaults
-"""
-
 import os
 import sys
 

@@ -1,12 +1,38 @@
+INT_PRIM = 'int'
+LONG_PRIM = 'long'
+DOUBLE_PRIM = 'double'
+FLOAT_PRIM = 'float'
+BYTE_PRIM = 'byte'
+BOOLEAN_PRIM = 'boolean'
+
 STRING = 'String'
 INTEGER = 'Integer'
+LONG = 'Long'
+DOUBLE = 'Double'
+FLOAT = 'Float'
+BYTE = 'Byte'
+BOOLEAN = 'Boolean'
 
-types = {
+DATE = 'Date'
+
+java_types = {
     'string': STRING,
+    'str': STRING,
     'int': INTEGER,
-    'integer': INTEGER
+    'integer': INTEGER,
+    'long': LONG,
+    'date': DATE,
+}
+
+dependencies = {
+    DATE: 'java.util.Date'
 }
 
 
-def translate_type(type):
-    return types[type.lower()]
+def fetch_type(type_string):
+    key = type_string.lower()
+    return java_types[key] if key in java_types else None
+
+
+def fetch_dependency(java_type):
+    return dependencies[java_type] if java_type in dependencies else None

@@ -27,7 +27,14 @@ class FileInformation:
         self.file_path = converter.gen_file_path()
         self.file_name = converter.gen_file_name(name)
         self.file_type = file_type
-        self.fields = [Field(name_pair) for name_pair in fields]
+        self.fields = []
+
+        for name_pair in fields:
+            field_name, field_type = name_pair.split(':')
+            if not field_name and not field_type:
+                raise ValueError("Could not parse field ['%s'] - Missing name or type" % name_pair)
+
+            self.fields.append(Field(field_name, field_type))
 
     def __str__(self):
         return '%s %s %s' % (str(self.file_type), str(self.package), str(self.class_name))
