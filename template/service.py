@@ -1,5 +1,6 @@
 import converter.model as model_converter
 import converter.repository as repo_converter
+import template.util as template_util
 import util.util as util
 
 _template = """package {package};
@@ -47,7 +48,7 @@ def gen_contents(file_info, id_type='Integer'):
     model_package = model_converter.gen_package_name()
     model_class = model_converter.gen_class_name(file_info.seed_name)
 
-    return _template.format(
+    return template_util.format_template(_template.format(
         package=file_info.package,
         class_name=file_info.class_name,
         model_package=model_package,
@@ -56,4 +57,4 @@ def gen_contents(file_info, id_type='Integer'):
         repo_class=repo_class,
         repo_package=repo_package,
         repo_var=util.type_to_var(repo_class),
-        id_type=id_type)
+        id_type=id_type))

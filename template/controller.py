@@ -1,6 +1,7 @@
 import converter.controller as controller_converter
 import converter.model as model_converter
 import converter.service as service_converter
+import template.util as template_util
 import util.util as util
 
 _template = """package {package};
@@ -52,7 +53,7 @@ def gen_contents(file_info, id_type='Integer'):
     model_package = model_converter.gen_package_name()
     model_class = model_converter.gen_class_name(file_info.seed_name)
 
-    return _template.format(
+    return template_util.format_template(_template.format(
         base_route=util.type_to_snake_case(controller_converter.gen_root_name(file_info.seed_name)),
         package=file_info.package,
         class_name=file_info.class_name,
@@ -62,4 +63,4 @@ def gen_contents(file_info, id_type='Integer'):
         service_package=service_package,
         service_class=service_class,
         service_var=util.type_to_var(service_class),
-        id_type=id_type)
+        id_type=id_type))

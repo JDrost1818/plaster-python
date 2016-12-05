@@ -1,3 +1,5 @@
+import template.util as util
+
 _template = """package {package};
 
 import org.springframework.data.domain.Page;
@@ -19,9 +21,9 @@ public interface {class_name} extends CrudRepository<{model}, {id_type}> {{
 
 
 def gen_contents(file_info, id_type='Integer'):
-    return _template.format(
+    return util.format_template(_template.format(
         package=file_info.package,
         class_name=file_info.class_name,
         model_package=file_info.model_package,
         model=file_info.model_name,
-        id_type=id_type)
+        id_type=id_type))
