@@ -50,7 +50,7 @@ the model differently. For example:
     @Builder
     @Data
     @NoArgsConstructor
-    public class User {
+    public class Example {
 
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
