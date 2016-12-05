@@ -1,4 +1,4 @@
-import template.util as util
+import template.template_util as template_util
 
 _template = """package {package};
 
@@ -21,7 +21,7 @@ public interface {class_name} extends CrudRepository<{model}, {id_type}> {{
 
 
 def gen_contents(file_info, id_type='Integer'):
-    return util.format_template(_template.format(
+    return template_util.format_template(_template.format(
         package=file_info.package,
         class_name=file_info.class_name,
         model_package=file_info.model_package,

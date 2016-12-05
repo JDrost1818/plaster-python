@@ -1,5 +1,5 @@
 import data.settings as settings
-import template.util as util
+import template.template_util as template_util
 from current import TEMPLATE as TEMPLATE
 from current_lombok import TEMPLATE as LOMBOK_TEMPLATE
 from domain.field import Field
@@ -45,7 +45,7 @@ def gen_contents(file_info, id_type='Integer'):
             if field.field_type.has_dependency():
                 dependencies += _dependency_template.format(dep=field.field_type.dependency)
 
-    return util.format_template(get_template(settings.IS_LOMBOK_SUPPORTED).format(
+    return template_util.format_template(get_template(settings.IS_LOMBOK_SUPPORTED).format(
         package=file_info.package,
         dependencies=dependencies,
         class_name=file_info.class_name,

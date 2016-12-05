@@ -1,6 +1,6 @@
 import converter.model as model_converter
 import converter.repository as repo_converter
-import template.util as template_util
+import template.template_util as template_util
 import util.util as util
 
 _template = """package {package};

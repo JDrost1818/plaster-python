@@ -1,8 +1,9 @@
+import util.util as util
+
 import converter.controller as controller_converter
 import converter.model as model_converter
 import converter.service as service_converter
-import template.util as template_util
-import util.util as util
+import template.template_util as template_util
 
 _template = """package {package};
 
