@@ -78,7 +78,6 @@ def load_from_settings_file():
             # This overwrites all the packages, but
             # will default to the original if it is
             # not being set in the gen file
-            print gen_type
             RELATIVE_PACKAGES[gen_type] = dir_args.get(gen_type, RELATIVE_PACKAGES[gen_type])
 
     # Checks to see if the user wants to manually enable/disable
@@ -86,3 +85,6 @@ def load_from_settings_file():
     lombok_args = yaml_file.get('lombok')
     if lombok_args:
         IS_LOMBOK_SUPPORTED = lombok_args.get('enabled', IS_LOMBOK_SUPPORTED)
+        if type(IS_LOMBOK_SUPPORTED) != bool:
+            raise ValueError("Error reading property 'lombok.enabled'. Expected of type boolean, got %s" %
+                             IS_LOMBOK_SUPPORTED)
