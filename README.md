@@ -24,13 +24,13 @@ where and how to generate files. However, if you would like to customize the gen
 gives you the ability to alter defaults by placing `bootgen.yml` in the root of the project. The following configurations
 are supported:
 
-    | Property       	| Description                                 	| Type   	|
-    |----------------	|---------------------------------------------	|--------	|
-    | dir.model      	| Directory in which to generate models       	| String 	|
-    | dir.repository 	| Directory in which to generate repositories 	| String 	|
-    | dir.controller 	| Directory in which to generate controllers  	| String 	|
-    | dir.service    	| Directory in which to generate services     	| String 	|
-    | lombok.enabled    | Should we enable generation in lombok mode   	| Boolean 	|
+| Property       	| Description                                 	| Type   	|
+|----------------	|---------------------------------------------	|--------	|
+| dir.model      	| Directory in which to generate models       	| String 	|
+| dir.repository 	| Directory in which to generate repositories 	| String 	|
+| dir.controller 	| Directory in which to generate controllers  	| String 	|
+| dir.service    	| Directory in which to generate services     	| String 	|
+| lombok.enabled    | Should we enable generation in lombok mode   	| Boolean 	|
 
 
 ### Lombok Support
