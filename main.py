@@ -16,7 +16,6 @@ To use this generation utility you must subscribe to a few naming conventions:
 
 import os
 import sys
-import xml.etree.ElementTree as ET
 
 import data.settings as settings
 import generation.generator as generator
@@ -40,7 +39,7 @@ gen_sub_type = args[1].lower()
 gen_name = args[2].lower()
 gen_kwargs = args[3:]
 
-settings.load(ET.parse('pom.xml').getroot())
+settings.load()
 
 error = generators[gen_type].perform(gen_sub_type, gen_name, gen_kwargs)
 

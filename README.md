@@ -18,6 +18,21 @@ The root is calculated upon script start. For example, if being run on a project
 
 the root will be `src/main/com/example/`
 
+### Customization
+Per default, Spring Generator will auto-discover necessary configurations and then use best-practices to decide
+where and how to generate files. However, if you would like to customize the generation of the files, Spring Generator
+gives you the ability to alter defaults by placing `bootgen.yml` in the root of the project. The following configurations
+are supported:
+
+    | Property       	| Description                                 	| Type   	|
+    |----------------	|---------------------------------------------	|--------	|
+    | dir.model      	| Directory in which to generate models       	| String 	|
+    | dir.repository 	| Directory in which to generate repositories 	| String 	|
+    | dir.controller 	| Directory in which to generate controllers  	| String 	|
+    | dir.service    	| Directory in which to generate services     	| String 	|
+    | lombok.enabled    | Should we enable generation in lombok mode   	| Boolean 	|
+
+
 ### Lombok Support
 Generation of models will change if a lombok dependency is found in `pom.xml`. This will import lombok and annotate
 the model differently. For example:
