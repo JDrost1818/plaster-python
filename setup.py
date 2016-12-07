@@ -25,7 +25,7 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/JDrost1818/spring-generator',
+    url='https://github.com/JDrost1818/plaster',
 
     # Author details
     author='Jake Drost',
