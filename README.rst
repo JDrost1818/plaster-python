@@ -16,13 +16,13 @@ root/service/UserService.java \* Controller -
 root/controller/UsersController.java
 
 The root is calculated upon script start. For example, if being run on a
-project with the following in ``pom.xml``:
+project with the following in `pom.xml`:
 
 ::
 
     <groupId>com.example</groupId>
 
-the root will be ``src/main/com/example/``
+the root will be `src/main/com/example/`
 
 Installation
 """"""""""""
@@ -34,7 +34,7 @@ installed, you can install Plaster with following:
 
     pip install plaster-spring-boot
 
-Otherwise, ensure Python's ``setuptools`` is installed to install
+Otherwise, ensure Python's `setuptools` is installed to install
 Plaster. If on an ubuntu system, use the following:
 
 ::
@@ -56,11 +56,11 @@ Customization
 Per default, Plater will auto-discover necessary configurations and then
 use best-practices to decide where and how to generate files. However,
 if you would like to customize the generation of the files, Plater gives
-you the ability to alter defaults by placing ``plaster.yml`` in the root
+you the ability to alter defaults by placing `plaster.yml` in the root
 of the project. The following configurations are supported:
 
-Property ``dir``
-^^^^^^^^^^^^^^^^
+Property `dir`
+^^^^^^^^^^^^^^
 
 +--------------+-----------------------------------------------+----------+--------------+
 | Property     | Description                                   | Type     | Default      |
@@ -74,8 +74,8 @@ Property ``dir``
 | service      | Directory in which to generate services       | String   | service      |
 +--------------+-----------------------------------------------+----------+--------------+
 
-Property ``lombok``
-^^^^^^^^^^^^^^^^^^^
+Property `lombok`
+^^^^^^^^^^^^^^^^^
 
 +----------------+-----------------------------------------+---------+-----------+
 | Property       | Description                             | Type    | Default   |
@@ -85,15 +85,15 @@ Property ``lombok``
 |                |                                         |         | dependenc |
 |                |                                         |         | y         |
 |                |                                         |         | in        |
-|                |                                         |         | ``pom.xml |
-|                |                                         |         | ``?       |
+|                |                                         |         | `pom.xml` |
+|                |                                         |         | ?         |
 +----------------+-----------------------------------------+---------+-----------+
 
 Lombok Support
 """"""""""""""
 
 Generation of models will change if a lombok dependency is found in
-``pom.xml``. This will import lombok and annotate the model differently.
+`pom.xml`. This will import lombok and annotate the model differently.
 For example:
 
 ::
@@ -116,9 +116,6 @@ For example:
 
     }
 
-.. raw:: html
-
-   <!-- separate -->
 
 ::
 
