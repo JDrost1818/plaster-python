@@ -14,6 +14,7 @@ BYTE = 'Byte'
 BOOLEAN = 'Boolean'
 
 DATE = 'Date'
+TIMESTAMP = 'Timestamp'
 
 java_types = {
     'string': STRING,
@@ -22,10 +23,12 @@ java_types = {
     'integer': INTEGER,
     'long': LONG,
     'date': DATE,
+    'timestamp': TIMESTAMP,
 }
 
 dependencies = {
-    DATE: 'java.util.Date'
+    DATE: 'java.util.Date',
+    TIMESTAMP: 'java.sql.Timestamp'
 }
 
 
