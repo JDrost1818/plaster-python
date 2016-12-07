@@ -1,2 +1,5 @@
 .idea
 *.pyc
+build/
+dist/
+plaster.egg-info/

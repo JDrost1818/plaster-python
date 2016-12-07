@@ -10,12 +10,16 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
-    name='Plaster',
+    name='plaster',
 
     # Versions should comply with PEP440.  For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
     version='0.1.0',
+    packages=find_packages(),
+    py_modules=[
+        'src.plaster',
+    ],
 
     description='Generates scaffolding for new models for Spring Boot projects',
     long_description=long_description,
@@ -48,15 +52,14 @@ setup(
         # Specify the Python versions you support here. In particular, ensure
         # that you indicate whether you support Python 2, Python 3 or both.
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
     ],
 
     # What does your project relate to?
     keywords='sample setuptools development',
-
-    # You can just specify the packages manually here if your project is
-    # simple. Or you can use find_packages().
-    packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     install_requires=['pattern', 'pyyaml'],
+    entry_points={
+        'console_scripts': [
+            'plaster = src.plaster:main',
+        ]
+    }
 )
