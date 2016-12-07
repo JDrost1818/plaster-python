@@ -8,12 +8,14 @@ For Example:
 
 ::
 
-    > plaster g scaffold User name:string age:integer
+    plaster g scaffold User name:string age:integer
 
-Will create the following files: \* Model - root/model/User.java \*
-Repository - root/repository/UserRepository.java \* Service -
-root/service/UserService.java \* Controller -
-root/controller/UsersController.java
+Will create the following files:
+
+- Model - root/model/User.java
+- Repository - root/repository/UserRepository.java
+- Service - service/UserService.java
+- Controller - controller/UsersController.java
 
 The root is calculated upon script start. For example, if being run on a
 project with the following in `pom.xml`:
