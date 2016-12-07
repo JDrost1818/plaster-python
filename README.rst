@@ -25,7 +25,7 @@ project with the following in ``pom.xml``:
 the root will be ``src/main/com/example/``
 
 Installation
-------------
+""""""""""""
 
 If you have `pip <https://pip.pypa.io/en/stable/installing/>`__
 installed, you can install Plaster with following:
@@ -51,7 +51,7 @@ navigate to the directory in which it was downloaded and run:
     python setup.py install
 
 Customization
--------------
+"""""""""""""
 
 Per default, Plater will auto-discover necessary configurations and then
 use best-practices to decide where and how to generate files. However,
@@ -59,8 +59,8 @@ if you would like to customize the generation of the files, Plater gives
 you the ability to alter defaults by placing ``plaster.yml`` in the root
 of the project. The following configurations are supported:
 
-##### Property ``dir``
-----------------------
+Property ``dir``
+^^^^^^^^^^^^^^^^
 
 +--------------+-----------------------------------------------+----------+--------------+
 | Property     | Description                                   | Type     | Default      |
@@ -74,8 +74,8 @@ of the project. The following configurations are supported:
 | service      | Directory in which to generate services       | String   | service      |
 +--------------+-----------------------------------------------+----------+--------------+
 
-##### Property ``lombok``
--------------------------
+Property ``lombok``
+^^^^^^^^^^^^^^^^^^^
 
 +----------------+-----------------------------------------+---------+-----------+
 | Property       | Description                             | Type    | Default   |
@@ -90,7 +90,7 @@ of the project. The following configurations are supported:
 +----------------+-----------------------------------------+---------+-----------+
 
 Lombok Support
-~~~~~~~~~~~~~~
+""""""""""""""
 
 Generation of models will change if a lombok dependency is found in
 ``pom.xml``. This will import lombok and annotate the model differently.
