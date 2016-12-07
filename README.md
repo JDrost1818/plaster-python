@@ -19,7 +19,11 @@ The root is calculated upon script start. For example, if being run on a project
 the root will be `src/main/com/example/`
 
 ### Installation
-Python's `setuptools` must be installed to install Plaster. If on an ubuntu system, use the following:
+If you have [pip](https://pip.pypa.io/en/stable/installing/) installed, you can install Plaster with following:
+
+    pip install plaster-spring-boot
+
+Otherwise, ensure Python's `setuptools` is installed to install Plaster. If on an ubuntu system, use the following:
     
     sudo apt-get install python-setuptools
     
