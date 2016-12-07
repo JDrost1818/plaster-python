@@ -34,7 +34,7 @@ def load_from_pom():
     global REL_PATH, MAVEN_GROUP_ID, IS_LOMBOK_SUPPORTED
 
     xml_tree = ET.parse('pom.xml').getroot()
-    if not xml_tree:
+    if xml_tree is None:
         raise IOError('Could not find pom.xml')
 
     # Everything is prepended with this version,

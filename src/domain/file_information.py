@@ -1,8 +1,8 @@
-import converter.controller as controller_converter
-import converter.model as model_converter
-import converter.repository as repo_converter
-import converter.service as service_converter
-import data.types as gen_types
+import src.converter.controller as controller_converter
+import src.converter.model as model_converter
+import src.converter.repository as repo_converter
+import src.converter.service as service_converter
+import src.data.types as gen_types
 from field import Field
 
 file_converters = {

@@ -1,8 +1,8 @@
-import data.settings as settings
-import template.template_util as template_util
+import src.data.settings as settings
+import src.template.template_util as template_util
 from current import TEMPLATE as TEMPLATE
 from current_lombok import TEMPLATE as LOMBOK_TEMPLATE
-from domain.field import Field
+from src.domain.field import Field
 
 _field_template = '''
     private {type} {name};

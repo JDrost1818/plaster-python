@@ -1,4 +1,4 @@
-import template.template_util as template_util
+import src.template.template_util as template_util
 
 _template = """package {package};
 

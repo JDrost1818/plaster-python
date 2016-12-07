@@ -1,7 +1,7 @@
 import pattern.text.en as pattern
 
-import data.settings as settings
-from data.types import CONTROLLER as GEN_TYPE
+import src.data.settings as settings
+from src.data.types import CONTROLLER as GEN_TYPE
 
 
 def gen_root_name(root_name):

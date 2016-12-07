@@ -1,7 +1,7 @@
-import converter.model as model_converter
-import converter.repository as repo_converter
-import template.template_util as template_util
-import util.util as util
+import src.converter.model as model_converter
+import src.converter.repository as repo_converter
+import src.template.template_util as template_util
+import src.util.util as util
 
 _template = """package {package};
 

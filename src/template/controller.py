@@ -1,9 +1,9 @@
-import util.util as util
+import src.util.util as util
 
-import converter.controller as controller_converter
-import converter.model as model_converter
-import converter.service as service_converter
-import template.template_util as template_util
+import src.converter.controller as controller_converter
+import src.converter.model as model_converter
+import src.converter.service as service_converter
+import src.template.template_util as template_util
 
 _template = """package {package};
 

@@ -1,4 +1,4 @@
-import data.java_types as java_types
+import src.data.java_types as java_types
 
 
 class JavaType:

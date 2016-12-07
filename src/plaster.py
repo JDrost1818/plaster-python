@@ -3,8 +3,8 @@
 import os
 import sys
 
-import data.settings as settings
-import generation.generator as generator
+import src.data.settings as settings
+import src.generation.generator as generator
 
 generators = {
     'g': generator,

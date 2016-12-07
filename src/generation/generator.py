@@ -1,12 +1,12 @@
 import pattern.text.en as pattern
 
-import data.types as gen_types
-import template.controller as controller_file_gen
-import template.model.model as model_file_gen
-import template.repository as repo_file_gen
-import template.service as service_file_gen
-from domain.file_information import FileInformation
-from util.util import *
+import src.data.types as gen_types
+import src.template.controller as controller_file_gen
+import src.template.model.model as model_file_gen
+import src.template.repository as repo_file_gen
+import src.template.service as service_file_gen
+from src.domain.file_information import FileInformation
+from src.util.util import *
 
 _generation_map = {
     'scaffold': [
