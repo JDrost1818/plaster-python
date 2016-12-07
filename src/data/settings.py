@@ -60,7 +60,7 @@ def load_from_pom():
 
 def load_from_settings_file():
     """
-    Searches configuration options defined for the project in the bootgen.yml
+    Searches configuration options defined for the project in the plaster.yml
      file. Anything properties found should overwrite the defaults and those
      found in the pom. 
     """
@@ -68,12 +68,12 @@ def load_from_settings_file():
 
     # Check to see if a settings file
     # is provided, if not, exit early
-    if not os.path.isfile('bootgen.yml'):
+    if not os.path.isfile('plaster.yml'):
         return
 
     # yaml#load returns none if there are no
     # settings in the file, so check for that
-    yaml_file = yaml.load(open('bootgen.yml'))
+    yaml_file = yaml.load(open('plaster.yml'))
     if not yaml_file:
         return
 
