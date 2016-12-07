@@ -1,10 +1,10 @@
-# Spring Generator
+# Plaster
 
 Project to bring similar functionality found in Rails to the Spring Boot platform. Currently only supports maven-enabled projects.
 
 For Example:
 
-    > python main.py g scaffold User name:string age:integer
+    > plaster g scaffold User name:string age:integer
 
 Will create the following files:
 * Model - root/model/User.java
@@ -18,9 +18,19 @@ The root is calculated upon script start. For example, if being run on a project
 
 the root will be `src/main/com/example/`
 
+### Installation
+Python's `setuptools` must be installed to install Plaster. If on a linux system, use the following:
+    
+    sudo apt-get install python-setuptools
+    
+Then download Plaster onto your machine, navigate to the directory in which it was downloaded and run:
+    
+    python setup.py install
+    
+
 ### Customization
-Per default, Spring Generator will auto-discover necessary configurations and then use best-practices to decide
-where and how to generate files. However, if you would like to customize the generation of the files, Spring Generator
+Per default, Plater will auto-discover necessary configurations and then use best-practices to decide
+where and how to generate files. However, if you would like to customize the generation of the files, Plater
 gives you the ability to alter defaults by placing `bootgen.yml` in the root of the project. The following configurations
 are supported:
 
