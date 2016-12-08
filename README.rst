@@ -52,15 +52,6 @@ navigate to the directory in which it was downloaded and run:
 
     python setup.py install
 
-Customization
-"""""""""""""
-
-Per default, Plater will auto-discover necessary configurations and then
-use best-practices to decide where and how to generate files. However,
-if you would like to customize the generation of the files, Plater gives
-you the ability to alter defaults by placing `plaster.yml` in the root
-of the project. The following configurations are supported:
-
 Usage
 """""
 
@@ -95,6 +86,15 @@ Usage
       -k [KEY], --key [KEY]
                             indicates the following field:type pair should define the key
                             NOTE: should be last param
+
+Customization
+"""""""""""""
+
+Per default, Plater will auto-discover necessary configurations and then
+use best-practices to decide where and how to generate files. However,
+if you would like to customize the generation of the files, Plater gives
+you the ability to alter defaults by placing `plaster.yml` in the root
+of the project. The following configurations are supported:
 
 Property `dir`
 ^^^^^^^^^^^^^^
