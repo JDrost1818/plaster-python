@@ -27,7 +27,6 @@ class Docs:
         'scaffold',
     ]
     generation_type_choices += types.ALL
-    generation_type_choices += ['field']
 
     model = 'name of model for which to perform actions'
 

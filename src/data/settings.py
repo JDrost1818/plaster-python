@@ -3,9 +3,9 @@ import xml.etree.ElementTree as ET
 
 import yaml
 
-from src.domain.field import Field
 import java_types as java_types
 import types as types
+from src.domain.field import Field
 
 BASE_PATH = 'src/main/java/'
 REL_PATH = ''
@@ -99,7 +99,7 @@ def load_from_settings_file():
     # instead of root/model
     dir_args = yaml_file.get('dir')
     if dir_args:
-        for gen_type in types.ALL:
+        for gen_type in types.FILES:
             # This overwrites all the packages, but
             # will default to the original if it is
             # not being set in the gen file

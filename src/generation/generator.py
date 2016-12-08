@@ -1,5 +1,3 @@
-import pattern.text.en as pattern
-
 import src.data.types as gen_types
 import src.template.controller as controller_file_gen
 import src.template.model.model as model_file_gen
@@ -7,15 +5,6 @@ import src.template.repository as repo_file_gen
 import src.template.service as service_file_gen
 from src.domain.file_information import FileInformation
 from src.util.util import *
-
-_generation_map = {
-    'scaffold': [
-        gen_types.MODEL,
-        gen_types.REPOSITORY,
-        gen_types.SERVICE,
-        gen_types.CONTROLLER,
-    ]
-}
 
 _template_map = {
     gen_types.MODEL: model_file_gen,
@@ -33,14 +22,14 @@ def generate_file(file_info):
 
 
 def perform(gen_type, gen_name, fields):
-    generations = _generation_map[gen_type]
+    generations = gen_types.fetch_related_types(gen_type)
+    print generations
 
     if not (gen_name and gen_type):
         return "Missing required argument"
     if not generations:
         return "Unknown generation type :", gen_type
 
-    gen_name = pattern.singularize(gen_name.capitalize().replace(' ', ''))
     files_to_generate = [FileInformation(gen_name, fields, elem) for elem in generations]
     for file_to_generate in files_to_generate:
         generate_file(file_to_generate)

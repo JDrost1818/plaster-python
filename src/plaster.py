@@ -1,19 +1,22 @@
 #!/usr/bin/python
-
 import argparse
 import os
 import sys
 from argparse import RawTextHelpFormatter
 
+import pattern.text.en as pattern
+
+import src.data.modes as modes
 import src.data.settings as settings
+import src.generation.disposer as disposer
 import src.generation.generator as generator
 from data.strings import Docs
 from data.version import __version__
 from domain.field import Field
 
 generators = {
-    'g': generator,
-    'generate': generator
+    modes.GENERATE: generator,
+    modes.DELETE: disposer,
 }
 
 
@@ -38,17 +41,17 @@ def main():
         print 'Not on the root level of a maven project - cannot generate'
         sys.exit(-1)
 
-    gen_type = args.mode
+    gen_type = modes.fetch_mode(args.mode)
     gen_sub_type = args.type
-    gen_name = args.model
-    gen_kwargs = args.fields
+    gen_name = pattern.singularize(args.model.capitalize().replace('_', ''))
+    fields = args.fields
 
     settings.load()
     if args.key:
         name, field_type = args.key.split(':')
         settings.ID = Field(name, field_type)
 
-    error = generators[gen_type].perform(gen_sub_type, gen_name, gen_kwargs)
+    error = generators[gen_type].perform(gen_sub_type, gen_name, fields)
 
     if error:
         print error
