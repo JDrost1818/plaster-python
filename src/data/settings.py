@@ -8,6 +8,7 @@ import types as types
 from src.domain.field import Field
 
 BASE_PATH = 'src/main/java/'
+SUB_DIR_PATH = ''
 REL_PATH = ''
 MAVEN_GROUP_ID = ''
 
@@ -46,7 +47,7 @@ def load_from_pom():
     version = xml_tree.tag.replace('project', '')
 
     MAVEN_GROUP_ID = xml_tree.find(version + 'groupId').text
-    REL_PATH = BASE_PATH + MAVEN_GROUP_ID.replace('.', '/') + '/'
+    REL_PATH = ('%s/%s/' % (BASE_PATH, MAVEN_GROUP_ID.replace('.', '/'))).replace('//', '/')
 
     dependencies = xml_tree.find(version + 'dependencies')
 

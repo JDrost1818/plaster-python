@@ -29,7 +29,7 @@ def main():
     # Positional Arguments
     parser.add_argument('-v', '--version', help=Docs.version, action='version', version=__version__)
     parser.add_argument('-k', '--key', nargs='?', help=Docs.key)
-    parser.add_argument('-d', '--dir', help=Docs.dir)
+    parser.add_argument('-d', '--dir', help=Docs.dir, default='')
 
     parser.add_argument('mode', choices=Docs.generation_mode_choices, help=Docs.generation_mode)
     parser.add_argument('type', choices=Docs.generation_type_choices, help=Docs.generation_type)
@@ -48,6 +48,7 @@ def main():
     fields = args.fields
 
     settings.load()
+    settings.SUB_DIR_PATH = args.dir
     if args.key:
         name, field_type = args.key.split(':')
         settings.ID = Field(name, field_type)
