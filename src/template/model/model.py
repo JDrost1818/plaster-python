@@ -2,7 +2,6 @@ import src.data.settings as settings
 import src.template.template_util as template_util
 from current import TEMPLATE as TEMPLATE
 from current_lombok import TEMPLATE as LOMBOK_TEMPLATE
-from src.domain.field import Field
 
 _field_template = '''
     private {type} {name};
@@ -18,26 +17,20 @@ _getter_setter_template = '''
     }}
 '''
 
-_dependency_template = 'import {dep};\n'
-
 
 def get_template(enable_lombok):
     return LOMBOK_TEMPLATE if enable_lombok else TEMPLATE
 
 
-def gen_contents(file_info, id_type='Integer'):
-    fields = [Field('id', 'Integer')] + file_info.fields
-    dependencies = ''
+def gen_contents(file_info):
+    fields = [settings.ID] + file_info.fields
     body = ''
 
     # Enters all the fields to be associated with the model
     for field in file_info.fields:
         body += _field_template.format(type=field.field_type.class_name, name=field.name)
 
-    # Finds all the dependencies needed for the fields
-    for field in fields:
-        if field.field_type.has_dependency() and field.field_type.dependency not in dependencies:
-            dependencies += _dependency_template.format(dep=field.field_type.dependency)
+    dependencies = template_util.gen_dependency_string(fields)
 
     # If lombok is not supported, we must manually
     # enter in the getters and the setters
@@ -52,6 +45,6 @@ def gen_contents(file_info, id_type='Integer'):
         package=file_info.package,
         dependencies=dependencies,
         class_name=file_info.class_name,
-        id_type=id_type,
+        id=settings.ID,
         header='',
         body=body))

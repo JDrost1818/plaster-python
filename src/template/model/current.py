@@ -13,7 +13,7 @@ public class {class_name} {{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private {id_type} id;
+    private {id.field_type.class_name} {id.name};
     {body}
 }}
 

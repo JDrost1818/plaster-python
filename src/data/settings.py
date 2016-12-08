@@ -3,11 +3,15 @@ import xml.etree.ElementTree as ET
 
 import yaml
 
+from src.domain.field import Field
+import java_types as java_types
 import types as types
 
 BASE_PATH = 'src/main/java/'
 REL_PATH = ''
 MAVEN_GROUP_ID = ''
+
+ID = Field('id', java_types.INTEGER)
 
 IS_LOMBOK_SUPPORTED = False
 
@@ -64,7 +68,7 @@ def load_from_settings_file():
      file. Anything properties found should overwrite the defaults and those
      found in the pom. 
     """
-    global IS_LOMBOK_SUPPORTED, RELATIVE_PACKAGES
+    global ID, IS_LOMBOK_SUPPORTED, RELATIVE_PACKAGES
 
     # Check to see if a settings file
     # is provided, if not, exit early
@@ -76,6 +80,14 @@ def load_from_settings_file():
     yaml_file = yaml.load(open('plaster.yml'))
     if not yaml_file:
         return
+
+    # Checks for a custom id name and type
+    id_args = yaml_file.get('id')
+    if id_args:
+        name = id_args.get('name', ID.name)
+        field_type = id_args.get('type', ID.field_type)
+
+        ID = Field(name, field_type)
 
     # Checks for custom location(s) for file generation
     # For example:
