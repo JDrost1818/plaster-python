@@ -5,7 +5,7 @@ import re
 def create_file(path, name, file_contents, create_not_found_dirs=True, mode="w+"):
     if create_not_found_dirs and not os.path.isdir(path):
         os.makedirs(path)
-    print path
+
     new_file = open(os.path.join(path, name), mode)
     new_file.write(file_contents)
     new_file.close()

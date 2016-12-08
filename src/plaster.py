@@ -9,6 +9,7 @@ import src.data.settings as settings
 import src.generation.generator as generator
 from data.strings import Docs
 from data.version import __version__
+from domain.field import Field
 
 generators = {
     'g': generator,
@@ -33,23 +34,19 @@ def main():
 
     args = parser.parse_args()
 
-    print args
-
-    if len(sys.argv) < 2:
-        print 'USAGE: plaster <type> [field:type]*'
-        sys.exit(-1)
     if not os.path.isfile('./pom.xml'):
         print 'Not on the root level of a maven project - cannot generate'
         sys.exit(-1)
 
-    args = sys.argv[1:]
-
-    gen_type = args[0].lower()
-    gen_sub_type = args[1].lower()
-    gen_name = args[2].lower()
-    gen_kwargs = args[3:]
+    gen_type = args.mode
+    gen_sub_type = args.type
+    gen_name = args.model
+    gen_kwargs = args.fields
 
     settings.load()
+    if args.key:
+        name, field_type = args.key.split(':')
+        settings.ID = Field(name, field_type)
 
     error = generators[gen_type].perform(gen_sub_type, gen_name, gen_kwargs)
 
