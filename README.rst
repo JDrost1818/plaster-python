@@ -68,7 +68,7 @@ Usage
 
     usage: plaster [-h] [-v] [-k [KEY]]
                    {generate,g,delete,d}
-                   {scaffold,model,repository,service,controller,field} model
+                   {scaffold,model,repository,service,controller,field} model_name
                    [fields [fields ...]]
 
     Generate files for Spring Boot
@@ -86,7 +86,7 @@ Usage
                                 service - the entire service
                                 controller - the entire controller
                                 field - individual field(s)
-      model                 name of model for which to perform actions
+      model_name            name of model for which to perform actions
       fields                fields to perform actions listed as name:type pairs
 
     optional arguments:

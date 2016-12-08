@@ -29,7 +29,7 @@ def main():
 
     parser.add_argument('mode', choices=Docs.generation_mode_choices, help=Docs.generation_mode)
     parser.add_argument('type', choices=Docs.generation_type_choices, help=Docs.generation_type)
-    parser.add_argument('model', help=Docs.model)
+    parser.add_argument('model', metavar='model_name', help=Docs.model)
     parser.add_argument('fields', nargs='*', help=Docs.fields)
 
     args = parser.parse_args()
