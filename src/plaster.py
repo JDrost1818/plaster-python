@@ -1,10 +1,14 @@
 #!/usr/bin/python
 
+import argparse
 import os
 import sys
+from argparse import RawTextHelpFormatter
 
 import src.data.settings as settings
 import src.generation.generator as generator
+from data.strings import Docs
+from data.version import __version__
 
 generators = {
     'g': generator,
@@ -13,6 +17,22 @@ generators = {
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Generate files for Spring Boot', formatter_class=RawTextHelpFormatter)
+
+    # Indicates we need to get the version
+    parser.add_argument('-v', '--version', help=Docs.version, action='version', version=__version__)
+
+    parser.add_argument('mode', help=Docs.generation_mode)
+    parser.add_argument('type', help=Docs.generation_type)
+    parser.add_argument('model', help=Docs.model)
+
+    field_group = parser.add_argument_group()
+    field_group.add_argument('k', help='indicates the following field:type pair should define the id')
+
+    args = parser.parse_args()
+
+    print args
+
     if len(sys.argv) < 2:
         print 'USAGE: plaster <type> [field:type]*'
         sys.exit(-1)

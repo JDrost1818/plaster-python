@@ -9,6 +9,8 @@ here = path.abspath(path.dirname(__file__))
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
+execfile('src/data/version.py')
+
 setup(
     name='plaster-spring-boot',
 
