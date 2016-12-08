@@ -23,7 +23,6 @@ def generate_file(file_info):
 
 def perform(gen_type, gen_name, fields):
     generations = gen_types.fetch_related_types(gen_type)
-    print generations
 
     if not (gen_name and gen_type):
         return "Missing required argument"
