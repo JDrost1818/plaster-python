@@ -33,4 +33,7 @@ class Docs:
     fields = 'fields to perform actions listed as name:type pairs'
 
     key = 'indicates the following field:type pair should define the key\n' \
-          'NOTE: should be last param'
+          'NOTE: should be a trailing param'
+
+    dir = 'defines a sub path in which to perform actions\n' \
+          'NOTE: should be a trailing param'

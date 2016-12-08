@@ -57,7 +57,7 @@ Usage
 
 ::
 
-    usage: plaster [-h] [-v] [-k [KEY]]
+    usage: plaster [-h] [-v] [-k [KEY]] [-d DIR]
                    {generate,g,delete,d}
                    {scaffold,model,repository,service,controller,field} model_name
                    [fields [fields ...]]
@@ -85,7 +85,9 @@ Usage
       -v, --version         fetches the current version of the tool
       -k [KEY], --key [KEY]
                             indicates the following field:type pair should define the key
-                            NOTE: should be last param
+                            NOTE: should be a trailing param
+      -d DIR, --dir DIR     defines a sub path in which to perform actions
+                            NOTE: should be a trailing param
 
 Customization
 """""""""""""
