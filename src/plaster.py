@@ -17,17 +17,19 @@ generators = {
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Generate files for Spring Boot', formatter_class=RawTextHelpFormatter)
+    parser = argparse.ArgumentParser(
+        prog='plaster',
+        description='Generate files for Spring Boot',
+        formatter_class=RawTextHelpFormatter)
 
-    # Indicates we need to get the version
+    # Positional Arguments
     parser.add_argument('-v', '--version', help=Docs.version, action='version', version=__version__)
+    parser.add_argument('-k', '--key', nargs='?', help=Docs.key)
 
-    parser.add_argument('mode', help=Docs.generation_mode)
-    parser.add_argument('type', help=Docs.generation_type)
+    parser.add_argument('mode', choices=Docs.generation_mode_choices, help=Docs.generation_mode)
+    parser.add_argument('type', choices=Docs.generation_type_choices, help=Docs.generation_type)
     parser.add_argument('model', help=Docs.model)
-
-    field_group = parser.add_argument_group()
-    field_group.add_argument('k', help='indicates the following field:type pair should define the id')
+    parser.add_argument('fields', nargs='*', help=Docs.fields)
 
     args = parser.parse_args()
 

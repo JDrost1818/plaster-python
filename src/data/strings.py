@@ -1,9 +1,19 @@
+import types as types
+
+
 class Docs:
     version = 'fetches the current version of the tool'
 
     generation_mode = 'whether to generate or delete\n' \
                       '    generate, g - create files\n' \
                       '    delete, d - remove files'
+
+    generation_mode_choices = [
+        'generate',
+        'g',
+        'delete',
+        'd'
+    ]
 
     generation_type = 'how to generate or delete content\n' \
                       '    scaffold - all files associated to the model\n' \
@@ -13,4 +23,15 @@ class Docs:
                       '    controller - the entire controller\n' \
                       '    field - individual field(s)'
 
+    generation_type_choices = [
+        'scaffold',
+    ]
+    generation_type_choices += types.ALL
+    generation_type_choices += ['field']
+
     model = 'name of model for which to perform actions'
+
+    fields = 'fields to perform actions listed as name:type pairs'
+
+    key = 'indicates the following field:type pair should define the key\n' \
+          'NOTE: should be last param'
