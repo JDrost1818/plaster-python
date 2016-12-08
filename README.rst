@@ -61,6 +61,41 @@ if you would like to customize the generation of the files, Plater gives
 you the ability to alter defaults by placing `plaster.yml` in the root
 of the project. The following configurations are supported:
 
+Usage
+"""""
+
+::
+
+    usage: plaster [-h] [-v] [-k [KEY]]
+                   {generate,g,delete,d}
+                   {scaffold,model,repository,service,controller,field} model
+                   [fields [fields ...]]
+
+    Generate files for Spring Boot
+
+    positional arguments:
+      {generate,g,delete,d}
+                            whether to generate or delete
+                                generate, g - create files
+                                delete, d - remove files
+      {scaffold,model,repository,service,controller,field}
+                            how to generate or delete content
+                                scaffold - all files associated to the model
+                                model - the entire model
+                                repository - the entire repository
+                                service - the entire service
+                                controller - the entire controller
+                                field - individual field(s)
+      model                 name of model for which to perform actions
+      fields                fields to perform actions listed as name:type pairs
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -v, --version         fetches the current version of the tool
+      -k [KEY], --key [KEY]
+                            indicates the following field:type pair should define the key
+                            NOTE: should be last param
+
 Property `dir`
 ^^^^^^^^^^^^^^
 
