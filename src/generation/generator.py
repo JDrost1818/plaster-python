@@ -22,9 +22,6 @@ def generate_file(file_info):
 
 
 def add_fields(file_info):
-    print 'Adding Field'
-    print file_info
-
     template = __template_map[file_info.file_type]
 
     file_contents = template.alter_contents(file_info)

@@ -72,7 +72,8 @@ def alter_contents(file_info):
             var_name = reg_results.group(3) + reg_results.group(4)
             for field in file_info.fields:
                 if field.name == var_name:
-                    raise Exception('Cannot add field [\'' + field.name + '\'] - already exists')
+                    raise Exception('Cannot add field [\'%s\'] - already exists for model \'%s\'' % (
+                        field.name, file_info.class_name))
 
             body_to_last_var_match += body_since_last_var_match
             body_since_last_var_match = ''
