@@ -15,6 +15,7 @@ import {service_package}.{service_class};
 import {model_package}.{model_class};
 
 @RestController
+@RequestMapping("/{base_route}")
 public class {class_name} {{
 
     private final {service_class} {service_var};
@@ -24,22 +25,22 @@ public class {class_name} {{
         this.{service_var} = {service_var};
     }}
 
-    @RequestMapping(value = "/{base_route}/{{{id.name}}}", method = RequestMethod.POST)
+    @RequestMapping(value = "/{{{id.name}}}", method = RequestMethod.POST)
     public {model_class} create(@PathVariable {id.field_type.class_name} {id.name}, @RequestBody {model_class} {model_var}) {{
         return this.{service_var}.create({model_var});
     }}
 
-    @RequestMapping(value = "/{base_route}/{{{id.name}}}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{{{id.name}}}", method = RequestMethod.GET)
     public {model_class} read(@PathVariable {id.field_type.class_name} {id.name}) {{
         return this.{service_var}.read({id.name});
     }}
 
-    @RequestMapping(value = "/{base_route}/{{{id.name}}}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{{{id.name}}}", method = RequestMethod.PUT)
     public {model_class} update(@PathVariable {id.field_type.class_name} {id.name}, @RequestBody {model_class} {model_var}) {{
         return this.{service_var}.update({model_var});
     }}
 
-    @RequestMapping(value = "/{base_route}/{{{id.name}}}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{{{id.name}}}", method = RequestMethod.DELETE)
     public void delete(@PathVariable {id.field_type.class_name} {id.name}) {{
         this.{service_var}.delete({id.name});
     }}
