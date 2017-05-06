@@ -19,7 +19,7 @@ import {model_package}.{model_class};
 public class {class_name} {{
 
     @Autowired
-    private final {service_class} {service_var};
+    private {service_class} {service_var};
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public {model_class} create(@RequestBody {model_class} {model_var}) {{

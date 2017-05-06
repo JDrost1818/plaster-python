@@ -17,7 +17,7 @@ import {repo_package}.{repo_class};
 public class {class_name} {{
 
     @Autowired
-    private final {repo_class} {repo_var};
+    private {repo_class} {repo_var};
 
     public {model_class} create({model_class} {model_var}) {{
         return this.{repo_var}.save({model_var});
