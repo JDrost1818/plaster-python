@@ -2,6 +2,7 @@
 import argparse
 import os
 import sys
+import re
 from argparse import RawTextHelpFormatter
 
 import pattern.text.en as pattern
@@ -44,7 +45,8 @@ def main():
 
     gen_type = modes.fetch_mode(args.mode)
     gen_sub_type = args.type
-    gen_name = pattern.singularize(args.model.capitalize().replace('_', ''))
+    gen_name = pattern.singularize(args.model.title())
+    gen_name = re.sub('[_ ]', '', gen_name)
     fields = args.fields
 
     settings.load()
