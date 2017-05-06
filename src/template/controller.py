@@ -25,8 +25,8 @@ public class {class_name} {{
         this.{service_var} = {service_var};
     }}
 
-    @RequestMapping(value = "/{{{id.name}}}", method = RequestMethod.POST)
-    public {model_class} create(@PathVariable {id.field_type.class_name} {id.name}, @RequestBody {model_class} {model_var}) {{
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public {model_class} create(@RequestBody {model_class} {model_var}) {{
         return this.{service_var}.create({model_var});
     }}
 
