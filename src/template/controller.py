@@ -21,9 +21,9 @@ public class {class_name} {{
     private final {service_class} {service_var};
 
     @Autowired
-    public {class_name} ({service_class} {service_var}) {
+    public {class_name} ({service_class} {service_var}) {{
         this.{service_var} = {service_var};
-    }
+    }}
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public {model_class} create(@RequestBody {model_class} {model_var}) {{

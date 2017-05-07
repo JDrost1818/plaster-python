@@ -19,9 +19,9 @@ public class {class_name} {{
     private final {repo_class} {repo_var};
 
     @Autowired
-    public {class_name}({repo_class} {repo_var}) {
+    public {class_name}({repo_class} {repo_var}) {{
         this.{repo_var} = {repo_var};
-    }
+    }}
 
     public {model_class} create({model_class} {model_var}) {{
         return this.{repo_var}.save({model_var});
