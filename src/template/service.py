@@ -16,7 +16,7 @@ import {repo_package}.{repo_class};
 @Service
 public class {class_name} {{
 
-    private {repo_class} {repo_var};
+    private final {repo_class} {repo_var};
 
     @Autowired
     public {class_name}({repo_class} {repo_var}) {
