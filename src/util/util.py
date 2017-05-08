@@ -18,3 +18,21 @@ def type_to_var(java_type):
 def type_to_snake_case(java_type):
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', java_type)
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+
+def search_for_filename(path, lowercase_name):
+    """
+    Searches for the given filename. Will to an ignore-case
+    comparison.
+
+    :param path: path to folder to start search
+    :param lowercase_name: name of file to find
+    :return: list of files that match the name
+    """
+    result = []
+    for root, dirs, files in os.walk(path):
+        for filename in files:
+            if lowercase_name == filename.lower():
+                result.append(os.path.join(root, filename))
+    return result
+
