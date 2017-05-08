@@ -100,7 +100,7 @@ def insert_fields(existing_file, content_string, file_info):
 
         variable_match = re.search(regices.VARIABLE_DECLARATION, line)
         method_match = re.search(regices.METHOD, line)
-        eof_match = re.search(regices.END_OF_FILE)
+        eof_match = re.search(regices.END_OF_FILE, line)
         if variable_match:
             # Makes sure the variable name isn't already taken
             var_name = variable_match.group(3) + variable_match.group(4)
@@ -114,12 +114,26 @@ def insert_fields(existing_file, content_string, file_info):
         elif method_match or eof_match:
             # This means we should inject the variable declaration in
             # between body_to_last_var_match and body_since_last_var_match
-            reached_eof = not not eof_match
             for field in file_info.fields:
                 body_to_last_var_match += _field_template.format(type=field.field_type.class_name, name=field.name)
+
+            if eof_match:
+                body_to_last_var_match = inject_getters_and_setters(body_to_last_var_match, file_info)
             break
 
-    return body_to_last_var_match + body_from_last_var_match, reached_eof
+    return body_to_last_var_match + body_from_last_var_match
+
+
+def inject_getters_and_setters(content_string, file_info):
+    if not settings.IS_LOMBOK_SUPPORTED:
+        # Add the getters and setters for the fields
+        for field in file_info.fields:
+            content_string += _getter_setter_template.format(
+                type=field.field_type.class_name,
+                name=field.name,
+                cap_name=field.name[0].upper() + field.name[1:])
+
+    return content_string
 
 
 def alter_contents(file_info):
@@ -128,19 +142,12 @@ def alter_contents(file_info):
         raise IOError('Cannot add field(s) to ' + file_info.file_name + ' - File does not exist')
 
     content_string = insert_dependencies(existing_file, file_info)
-    (content_string, reached_eof) = insert_fields(existing_file, content_string, file_info)
+    content_string = insert_fields(existing_file, content_string, file_info)
 
     for line in existing_file:
         if settings.IS_LOMBOK_SUPPORTED or not re.match(regices.END_OF_FILE, line):
             content_string += line
         else:
-            # Add the getters and setters for the fields
-            for field in file_info.fields:
-                content_string += _getter_setter_template.format(
-                    type=field.field_type.class_name,
-                    name=field.name,
-                    cap_name=field.name[0].upper() + field.name[1:])
-
-                content_string += '}\n'
+            content_string = inject_getters_and_setters(content_string, file_info)
 
     return content_string
