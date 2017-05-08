@@ -2,7 +2,7 @@ MODEL = 'model'
 REPOSITORY = 'repository'
 SERVICE = 'service'
 CONTROLLER = 'controller'
-FIELDS = 'field'
+FIELDS = 'fields'
 
 ALL = [
     MODEL,
@@ -19,11 +19,16 @@ FILES = [
     CONTROLLER,
 ]
 
+FILES_WITH_FIELDS = [
+    MODEL,
+]
+
 __type_map = {
-    'scaffold': FILES
+    'scaffold': FILES,
 }
 for gen_type in ALL:
     __type_map[gen_type] = gen_type
+__type_map[FIELDS] = FILES_WITH_FIELDS
 
 
 def fetch_related_types(cat_string):

@@ -55,10 +55,12 @@ def main():
         name, field_type = args.key.split(':')
         settings.ID = Field(name, field_type)
 
-    error = generators[gen_type].perform(gen_sub_type, gen_name, fields)
-
-    if error:
-        print error
+    try:
+        error = generators[gen_type].perform(gen_sub_type, gen_name, fields)
+        if error:
+            print error
+    except Exception, e:
+        print 'ERROR:', e.message
 
 
 if __name__ == '__main__':
