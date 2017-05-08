@@ -53,10 +53,46 @@ def gen_contents(file_info):
         body=body))
 
 
+def insert_dependencies(existing_file, file_info):
+    """
+    Inserts the required dependencies into the file for the given information
+    :param existing_file: file to insert in to
+    :param file_info: information about the content to be generated
+    :return: the content written
+    """
+    fields_with_dependencies = [field for field in file_info.fields if field.field_type.has_dependency()]
+    i = 0
+
+    content_to_last_dependency = ""
+    content_from_last_dependency = ""
+    for line in existing_file:
+        i += 1
+        content_from_last_dependency += line
+        reg_results = re.search(regices.IMPORT_DECLARATION, line)
+        if reg_results:
+            dependency = reg_results.group(2)
+            for field in fields_with_dependencies:
+                if field.field_type.dependency == dependency:
+                    fields_with_dependencies.remove(field)
+            content_to_last_dependency = content_from_last_dependency
+            content_from_last_dependency = ""
+        elif re.match(regices.CLASS, line):
+            # This means we've reached the class declaration
+            # and should therefore have injected the imports
+            # after the last dependency that we saw.
+            content_to_last_dependency += template_util.gen_dependency_string(fields_with_dependencies)
+            break
+
+    return content_to_last_dependency + content_from_last_dependency
+
+
 def alter_contents(file_info):
     existing_file = open(file_info.file_path + file_info.file_name)
     if not existing_file:
         raise IOError('Cannot add field(s) to ' + file_info.file_name + ' - File does not exist')
+
+    content_string = insert_dependencies(existing_file, file_info)
+    print content_string
 
     body_since_last_var_match = ''
     body_to_last_var_match = body_since_last_var_match
