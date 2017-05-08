@@ -61,12 +61,10 @@ def insert_dependencies(existing_file, file_info):
     :return: the content written
     """
     fields_with_dependencies = [field for field in file_info.fields if field.field_type.has_dependency()]
-    i = 0
 
     content_to_last_dependency = ""
     content_from_last_dependency = ""
     for line in existing_file:
-        i += 1
         content_from_last_dependency += line
         reg_results = re.search(regices.IMPORT_DECLARATION, line)
         if reg_results:
@@ -87,8 +85,6 @@ def insert_dependencies(existing_file, file_info):
 
 
 def insert_fields(existing_file, content_string, file_info):
-    reached_eof = False
-
     body_to_last_var_match = content_string
     body_from_last_var_match = ''
 
@@ -136,6 +132,16 @@ def inject_getters_and_setters(content_string, file_info):
     return content_string
 
 
+def insert_getters_and_setters(existing_file, content_string, file_info):
+    for line in existing_file:
+        if settings.IS_LOMBOK_SUPPORTED or not re.match(regices.END_OF_FILE, line):
+            content_string += line
+        else:
+            content_string = inject_getters_and_setters(content_string, file_info)
+
+    return content_string
+
+
 def alter_contents(file_info):
     existing_file = open(file_info.file_path + file_info.file_name)
     if not existing_file:
@@ -143,11 +149,6 @@ def alter_contents(file_info):
 
     content_string = insert_dependencies(existing_file, file_info)
     content_string = insert_fields(existing_file, content_string, file_info)
-
-    for line in existing_file:
-        if settings.IS_LOMBOK_SUPPORTED or not re.match(regices.END_OF_FILE, line):
-            content_string += line
-        else:
-            content_string = inject_getters_and_setters(content_string, file_info)
+    content_string = insert_getters_and_setters(existing_file, content_string, file_info)
 
     return content_string
