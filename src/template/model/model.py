@@ -56,6 +56,7 @@ def gen_contents(file_info):
 def insert_dependencies(existing_file, file_info):
     """
     Inserts the required dependencies into the file for the given information
+
     :param existing_file: file to insert in to
     :param file_info: information about the content to be generated
     :return: the content written
@@ -85,6 +86,14 @@ def insert_dependencies(existing_file, file_info):
 
 
 def insert_fields(existing_file, content_string, file_info):
+    """
+    Inserts the required field declarations into the file for the given information
+
+    :param existing_file: file to insert in to
+    :param content_string: file we are building, the string to add to
+    :param file_info: information about the content to be generated
+    :return: the content written
+    """
     body_to_last_var_match = content_string
     body_from_last_var_match = ''
 
@@ -121,6 +130,14 @@ def insert_fields(existing_file, content_string, file_info):
 
 
 def inject_getters_and_setters(content_string, file_info):
+    """
+    Inserts the necessary method declarations for getters and setters,
+    if we are not using lombok
+
+    :param content_string: file we are building, the string to add to
+    :param file_info: information about the content to be generated
+    :return: the content written
+    """
     if not settings.IS_LOMBOK_SUPPORTED:
         # Add the getters and setters for the fields
         for field in file_info.fields:
@@ -133,6 +150,15 @@ def inject_getters_and_setters(content_string, file_info):
 
 
 def insert_getters_and_setters(existing_file, content_string, file_info):
+    """
+    Iterates to the end of the file and inserts the required method
+    declarations for getters and setters into the file for the given information
+
+    :param existing_file: file to insert in to
+    :param content_string: file we are building, the string to add to
+    :param file_info: information about the content to be generated
+    :return: the content written
+    """
     for line in existing_file:
         if settings.IS_LOMBOK_SUPPORTED or not re.match(regices.END_OF_FILE, line):
             content_string += line
@@ -143,6 +169,20 @@ def insert_getters_and_setters(existing_file, content_string, file_info):
 
 
 def alter_contents(file_info):
+    """
+    Adds the fields found within the file information to the file defined by the file_info.
+    This will insert the following things:
+
+        1 - Any needed dependencies (imports) that are needed for the new fields.
+            These will only be injected if the dependency is not already satisfied
+        2 - Any needed fields that are needed. If the field name is already taken,
+            will throw an error to prevent further generation
+        3 - Any methods needed (getters/setters). This will only happen if Lombok
+            is not supported
+
+    :param file_info: information definining the file and how to alter it
+    :return: the altered file's contents
+    """
     existing_file = open(file_info.file_path + file_info.file_name)
     if not existing_file:
         raise IOError('Cannot add field(s) to ' + file_info.file_name + ' - File does not exist')
