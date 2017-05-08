@@ -74,7 +74,7 @@ def insert_dependencies(existing_file, file_info):
             for field in fields_with_dependencies:
                 if field.field_type.dependency == dependency:
                     fields_with_dependencies.remove(field)
-            content_to_last_dependency = content_from_last_dependency
+            content_to_last_dependency += content_from_last_dependency
             content_from_last_dependency = ""
         elif re.match(regices.CLASS, line):
             # This means we've reached the class declaration
