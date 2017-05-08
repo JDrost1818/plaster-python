@@ -11,7 +11,7 @@ def gen_root_name(root_name):
 def gen_package_name():
     return ('%s.%s.%s' % (settings.MAVEN_GROUP_ID,
                           settings.RELATIVE_PACKAGES[GEN_TYPE],
-                          settings.SUB_DIR_PATH.replace('/', '.'))).replace('..', '.')
+                          settings.SUB_DIR_PATH.replace('/', '.'))).replace('..', '.').rstrip('.')
 
 
 def gen_class_name(root_name):
