@@ -86,53 +86,61 @@ def insert_dependencies(existing_file, file_info):
     return content_to_last_dependency + content_from_last_dependency
 
 
+def insert_fields(existing_file, content_string, file_info):
+    reached_eof = False
+
+    body_to_last_var_match = content_string
+    body_from_last_var_match = ''
+
+    # This iterates through the file and finds the end of field
+    # declarations at the top of the file. When it finds the end,
+    # it appends the field declaration(s) for the new field(s)
+    for line in existing_file:
+        body_from_last_var_match += line
+
+        variable_match = re.search(regices.VARIABLE_DECLARATION, line)
+        method_match = re.search(regices.METHOD, line)
+        eof_match = re.search(regices.END_OF_FILE)
+        if variable_match:
+            # Makes sure the variable name isn't already taken
+            var_name = variable_match.group(3) + variable_match.group(4)
+            for field in file_info.fields:
+                if field.name == var_name:
+                    raise Exception('Cannot add field [\'%s\'] - already exists for model \'%s\'' % (
+                        field.name, file_info.class_name))
+
+            body_to_last_var_match += body_from_last_var_match
+            body_from_last_var_match = ''
+        elif method_match or eof_match:
+            # This means we should inject the variable declaration in
+            # between body_to_last_var_match and body_since_last_var_match
+            reached_eof = not not eof_match
+            for field in file_info.fields:
+                body_to_last_var_match += _field_template.format(type=field.field_type.class_name, name=field.name)
+            break
+
+    return body_to_last_var_match + body_from_last_var_match, reached_eof
+
+
 def alter_contents(file_info):
     existing_file = open(file_info.file_path + file_info.file_name)
     if not existing_file:
         raise IOError('Cannot add field(s) to ' + file_info.file_name + ' - File does not exist')
 
     content_string = insert_dependencies(existing_file, file_info)
-    print content_string
-
-    body_since_last_var_match = ''
-    body_to_last_var_match = body_since_last_var_match
-
-    # This iterates through the file and finds the end of field
-    # declarations at the top of the file. When it finds the end,
-    # it appends the field declaration(s) for the new field(s)
-    for line in existing_file:
-        body_since_last_var_match += line
-        reg_results = re.search(regices.VARIABLE_DECLARATION, line)
-        if reg_results:
-            # Makes sure the variable name isn't already taken
-            var_name = reg_results.group(3) + reg_results.group(4)
-            for field in file_info.fields:
-                if field.name == var_name:
-                    raise Exception('Cannot add field [\'%s\'] - already exists for model \'%s\'' % (
-                        field.name, file_info.class_name))
-
-            body_to_last_var_match += body_since_last_var_match
-            body_since_last_var_match = ''
-        elif re.match(regices.METHOD, line):
-            # This means we should inject the variable declaration in
-            # between body_to_last_var_match and body_since_last_var_match
-            for field in file_info.fields:
-                body_to_last_var_match += _field_template.format(type=field.field_type.class_name, name=field.name)
-            break
-
-    body = body_to_last_var_match + body_since_last_var_match
+    (content_string, reached_eof) = insert_fields(existing_file, content_string, file_info)
 
     for line in existing_file:
         if settings.IS_LOMBOK_SUPPORTED or not re.match(regices.END_OF_FILE, line):
-            body += line
+            content_string += line
         else:
             # Add the getters and setters for the fields
             for field in file_info.fields:
-                body += _getter_setter_template.format(
+                content_string += _getter_setter_template.format(
                     type=field.field_type.class_name,
                     name=field.name,
                     cap_name=field.name[0].upper() + field.name[1:])
 
-                body += '}\n'
+                content_string += '}\n'
 
-    return body
+    return content_string
