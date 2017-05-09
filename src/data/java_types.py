@@ -20,6 +20,8 @@ BOOLEAN = 'Boolean'
 
 DATE = 'Date'
 TIMESTAMP = 'Timestamp'
+LIST = 'List'
+SET = 'Set'
 
 java_types = {
     'string': STRING,
@@ -29,11 +31,15 @@ java_types = {
     'long': LONG,
     'date': DATE,
     'timestamp': TIMESTAMP,
+    'list': LIST,
+    'set': SET
 }
 
 dependencies = {
     DATE: 'java.util.Date',
-    TIMESTAMP: 'java.sql.Timestamp'
+    TIMESTAMP: 'java.sql.Timestamp',
+    LIST: 'java.util.List',
+    SET: 'java.util.Set',
 }
 
 
@@ -51,7 +57,8 @@ def fetch_type(type_string):
     """
     key = type_string.lower()
     if __is_typed_param(key):
-        pass
+        first_type, second_type = key.split("::")
+        return "%s<%s>" % (fetch_type(first_type), fetch_type(second_type))
 
     return java_types[key] if key in java_types else __fetch_custom_type(type_string)
 
@@ -64,6 +71,10 @@ def fetch_dependencies(java_type):
     :param java_type: type of java object to find a dependency for
     :return: the dependency to be used as an import
     """
+    if __is_typed_param(java_type):
+        first_type, second_type = java_type.split('<')
+        return [dep for dep in [fetch_dependencies(first_type), fetch_dependencies(second_type[:-1])] if dep]
+
     return dependencies[java_type] if java_type in dependencies else __fetch_custom_dependency(java_type)
 
 
@@ -106,4 +117,4 @@ def __fetch_custom_dependency(type_string):
 
 
 def __is_typed_param(type_string):
-    return '::' in type_string
+    return '::' in type_string or '<' in type_string
