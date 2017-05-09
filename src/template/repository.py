@@ -23,7 +23,7 @@ public interface {class_name} extends CrudRepository<{model}, {id.field_type.cla
 
 
 def gen_contents(file_info):
-    dependencies = template_util.gen_dependency_string([settings.ID])
+    dependencies = template_util.gen_dependency_string_for_field([settings.ID])
 
     return template_util.format_template(_template.format(
         package=file_info.package,

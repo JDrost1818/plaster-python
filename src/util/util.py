@@ -1,5 +1,6 @@
 import os
 import re
+from collections import Iterable
 
 
 def create_file(path, name, file_contents, create_not_found_dirs=True, mode="w+"):
@@ -20,6 +21,15 @@ def type_to_snake_case(java_type):
     return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
 
 
+def flatten(list_to_flatten):
+    for i in list_to_flatten:
+        if isinstance(i, Iterable) and not isinstance(i, basestring):
+            for subc in flatten(i):
+                yield subc
+        else:
+            yield i
+
+
 def search_for_filename(path, lowercase_name):
     """
     Searches for the given filename. Will to an ignore-case
@@ -35,4 +45,3 @@ def search_for_filename(path, lowercase_name):
             if lowercase_name == filename.lower():
                 result.append(os.path.join(root, filename))
     return result
-

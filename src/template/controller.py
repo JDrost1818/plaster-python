@@ -55,7 +55,7 @@ def gen_contents(file_info):
     service_class = service_converter.gen_class_name(file_info.seed_name)
     model_package = model_converter.gen_package_name()
     model_class = model_converter.gen_class_name(file_info.seed_name)
-    dependencies = template_util.gen_dependency_string([settings.ID])
+    dependencies = template_util.gen_dependency_string_for_field([settings.ID])
 
     return template_util.format_template(_template.format(
         base_route=util.type_to_snake_case(controller_converter.gen_root_name(file_info.seed_name)),

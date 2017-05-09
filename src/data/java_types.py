@@ -50,10 +50,13 @@ def fetch_type(type_string):
     :return: the java type
     """
     key = type_string.lower()
+    if __is_typed_param(key):
+        pass
+
     return java_types[key] if key in java_types else __fetch_custom_type(type_string)
 
 
-def fetch_dependency(java_type):
+def fetch_dependencies(java_type):
     """
     Fetches the dependency of the given java_type. For example
     "Date" needs to be imported and "java.util.Date" will be returned
@@ -100,3 +103,7 @@ def __fetch_custom_dependency(type_string):
         return files[0].split("java")[1][1:].replace("/", ".").replace("\\", ".")[:-1]
     else:
         raise Exception("Could not determine which " + type_string + " to use. Options: " + files)
+
+
+def __is_typed_param(type_string):
+    return '::' in type_string

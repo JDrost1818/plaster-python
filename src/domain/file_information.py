@@ -1,3 +1,5 @@
+import re
+
 import src.converter.controller as controller_converter
 import src.converter.model as model_converter
 import src.converter.repository as repo_converter
@@ -30,7 +32,9 @@ class FileInformation:
         self.fields = []
 
         for name_pair in fields:
-            field_name, field_type = name_pair.split(':')
+            # This splits on ':' but not '::',
+            # so something:List::Integer -> (something, List::Integer)
+            field_name, field_type = re.split('(?<!:):(?!:)', name_pair)
             if not field_name and not field_type:
                 raise ValueError("Could not parse field ['%s'] - Missing name or type" % name_pair)
 

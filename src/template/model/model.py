@@ -33,7 +33,7 @@ def gen_contents(file_info):
     for field in file_info.fields:
         body += _field_template.format(type=field.field_type.class_name, name=field.name)
 
-    dependencies = template_util.gen_dependency_string(fields)
+    dependencies = template_util.gen_dependency_string_for_field(fields)
 
     # If lombok is not supported, we must manually
     # enter in the getters and the setters
@@ -62,6 +62,7 @@ def insert_dependencies(existing_file, file_info):
     :return: the content written
     """
     fields_with_dependencies = [field for field in file_info.fields if field.field_type.has_dependency()]
+    unique_dependencies = list(set([field.field_type.dependencies for field in fields_with_dependencies]))
 
     content_to_last_dependency = ""
     content_from_last_dependency = ""
@@ -69,17 +70,19 @@ def insert_dependencies(existing_file, file_info):
         content_from_last_dependency += line
         reg_results = re.search(regices.IMPORT_DECLARATION, line)
         if reg_results:
-            dependency = reg_results.group(2)
-            for field in fields_with_dependencies:
-                if field.field_type.dependency == dependency:
-                    fields_with_dependencies.remove(field)
+            found_dependency = reg_results.group(2)
+            for dep in unique_dependencies:
+                if dep == found_dependency:
+                    unique_dependencies.remove(dep)
+
             content_to_last_dependency += content_from_last_dependency
             content_from_last_dependency = ""
         elif re.match(regices.CLASS, line):
             # This means we've reached the class declaration
             # and should therefore have injected the imports
             # after the last dependency that we saw.
-            content_to_last_dependency += template_util.gen_dependency_string(fields_with_dependencies)
+            print "Here"
+            content_to_last_dependency += template_util.gen_dependency_string(unique_dependencies)
             break
 
     return content_to_last_dependency + content_from_last_dependency

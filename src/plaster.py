@@ -1,8 +1,8 @@
 #!/usr/bin/python
 import argparse
 import os
-import sys
 import re
+import sys
 from argparse import RawTextHelpFormatter
 
 import pattern.text.en as pattern
@@ -55,12 +55,9 @@ def main():
         name, field_type = args.key.split(':')
         settings.ID = Field(name, field_type)
 
-    try:
-        error = generators[gen_type].perform(gen_sub_type, gen_name, fields)
-        if error:
-            print error
-    except Exception, e:
-        print 'ERROR:', e.message
+    error = generators[gen_type].perform(gen_sub_type, gen_name, fields)
+    if error:
+        print error
 
 
 if __name__ == '__main__':

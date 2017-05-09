@@ -7,7 +7,7 @@ class JavaType:
         if not self.class_name:
             raise ValueError("Unrecognized type ['%s']" % type_string)
 
-        self.dependency = java_types.fetch_dependency(self.class_name)
+        self.dependencies = java_types.fetch_dependencies(self.class_name)
 
     def has_dependency(self):
-        return not not self.dependency
+        return not not self.dependencies
